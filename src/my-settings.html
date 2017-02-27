@@ -1,0 +1,76 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="my-settings">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+        padding: 20px 0;
+      }
+    </style>
+
+      <app-route
+              route="{{route}}"
+              pattern="/:setting"
+              data="{{routeData}}"
+              tail="{{subroute}}"></app-route>
+
+      <!--<h1>Settings</h1>-->
+      <div class="horizontal-card">
+        <a class="text" href="/your-profile">Your Profile</a>
+      </div>
+      <div class="horizontal-card">
+        <a class="text" href="/your-account">Your Account</a>
+      </div>
+      <div class="horizontal-card">
+        <a class="text" href="/my-entities">Your entities</a>
+      </div>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'my-settings',
+      observers: [
+        '_settingChanged(setting, visible)'
+      ],
+      properties: {
+        setting: Object,
+        route: Object,
+        routeData: Object,
+        visible: Boolean,
+        offline: {
+          type: Boolean,
+          observer: '_offlineChanged'
+        },
+        failure: Boolean
+      },
+
+      _categoryChanged: function(category, visible) {
+        if (visible) {
+          if (!category) {
+            this.fire('show-invalid-url-warning');
+          } else {
+            this.debounce('change-section', function() {
+              // Notify the category and the page's title
+              this.fire('change-section', {
+                setting: setting.name,
+                title: category.title
+              });
+            });
+          }
+        }
+      },
+    });
+  </script>
+</dom-module>

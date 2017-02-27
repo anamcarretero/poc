@@ -1,0 +1,132 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<!-- shared styles for all views -->
+<dom-module id="shared-styles">
+  <template>
+    <style>
+      :root {
+        /* API Market web styles */
+        --primary-color-blue-6 : #094FA4;
+        --primary-color-blue-5 : #006EC1;
+        --primary-color-blue-4 : #009EE5;
+        --primary-color-blue-3 : #52BCEC;
+        --primary-color-blue-2 : #89D1F3;
+        --primary-color-blue-1 : #B5E5F9;
+        --primary-color-blue-statistics : #7EB9EE;
+        --grey-color-black : #000000;
+        --grey-color-dark-grey : #363636;
+        --grey-color-dark-blue-grey : #364250;
+        --grey-color-blue-grey : #566270;
+        --grey-color-grey : #72767D;
+        --grey-color-blue-light-grey : #A3A9B4;
+        --grey-color-light-grey : #F0F1F7;
+        --grey-color-white : #FFFFFF;
+        --secondary-color-yellow : #FDBD2C;
+        --secondary-color-yellow-light : #FEDB8B;
+        --secondary-color-orange : #F6891E;
+        --secondary-color-orange-light : #FAC483;
+        --secondary-color-green : #9BC641;
+        --secondary-color-green-dark : #93BA3D;
+        --secondary-color-green-light : #CDE2A0;
+        --secondary-color-magenta : #AB1D5C;
+      }
+      .card {
+        margin: 0 0 12px 0;
+        padding: 16px;
+        color: #757575;
+        background-color: #fff;
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+      }
+
+      .horizontal-card {
+        font-size: 16px;
+        line-height: 48px;
+        min-height: 48px;
+        color: var(--grey-color-dark-grey);
+        border-top: 1px solid var(--grey-color-light-grey);
+        border-bottom: 1px solid var(--grey-color-light-grey);
+        margin-bottom: -1px;
+      }
+
+      .horizontal-card a {
+        padding: 0 20px;
+        text-decoration: none;
+        color: inherit;
+        line-height: inherit;
+      }
+
+      .text {
+        font-size: 16px;
+        line-height: 2em;
+        color: var(--grey-color-dark-grey);
+      }
+      .small-text {
+        color: var(--grey-color-blue-light-grey);
+        font-size: 12px;
+        line-height: 1.35em;
+      }
+
+      h1 {
+        margin: 16px 0;
+        font-size: 24px;
+        line-height: 1.35em;
+        font-weight: 300;
+        text-align: center;
+        color: var(--grey-color-dark-blue-grey);
+      }
+
+      paper-input-container {
+        --paper-input-container-color: var(--grey-color-blue-light-grey);
+        --paper-input-container-focus-color: var(--primary-color-blue-4);
+        --paper-input-container-label-focus: {
+          font-size: 16px;
+         };
+      }
+
+      paper-button.primary {
+        background-color: var(--primary-color-blue-4);
+        color: white;
+        display: block;
+        border-radius: 2px;
+        text-align: center;
+        text-transform: none;
+        margin: 12px 0;
+        --paper-button-ink-color: var(--primary-color-blue-5);
+        --paper-button-raised-keyboard-focus: {
+            background-color: var(--primary-color-blue-5);
+            font-weight: normal;
+         };
+        --paper-button-flat-keyboard-focus: {
+         var(--primary-color-blue-4);
+         };
+      }
+
+      paper-button:focus {
+        background-color: var(--primary-color-blue-4);
+      }
+
+      .link {
+        font-size: inherit;
+        text-decoration: none;
+        color: var(--primary-color-blue-4);
+        transition: color 0.2s linear 0s;
+      }
+
+      .link:hover {
+        cursor: pointer;
+        color: var(--primary-color-blue-6);
+      }
+
+    </style>
+  </template>
+</dom-module>

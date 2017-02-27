@@ -1,0 +1,91 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="my-entities">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+        padding: 12px;
+        background-color: var(--grey-color-light-grey);
+      }
+
+      .entity-logo {
+        --iron-image-height: 16px;
+      }
+
+    </style>
+
+    <div class="card">
+      <!--<h1>My entities</h1>-->
+      <!--<p>Ut labores minimum atomorum pro. Laudem tibique ut has.</p>-->
+      <iron-image class="entity-logo" src="../images/0182.png"></iron-image>
+      <div class="horizontal-card">
+        <div class="text"><span>(5896)</span> · <span>Cuentas personales</span></div>
+        <div class="small-text">Actualizado hace 11 horas</div>
+      </div>
+
+      <div class="horizontal-card">
+        <div class="text"><span>(8965)</span> · <span>Cuentas personales</span></div>
+        <div class="small-text">Actualizado hace 11 horas</div>
+      </div>
+
+      <div class="horizontal-card">
+        <div class="text"><span>(5623)</span> · <span>Crédito</span></div>
+        <div class="small-text">Actualizado hace 11 horas</div>
+      </div>
+
+      <div class="horizontal-card">
+        <div class="text"><span>(1452)</span> · <span>Complementarias</span></div>
+        <div class="small-text">Actualizado hace 11 horas</div>
+      </div>
+
+    </div>
+
+    <div class="card">
+      <!--<h1>My entities</h1>-->
+      <!--<p>Ut labores minimum atomorum pro. Laudem tibique ut has.</p>-->
+      <iron-image class="entity-logo" src="../images/bankinter.gif"></iron-image>
+      <div class="horizontal-card">
+        <div class="text"><span>(5896)</span> · <span>Cuentas personales</span></div>
+        <div class="small-text">Actualizado hace 11 horas</div>
+      </div>
+
+      <div class="horizontal-card">
+        <div class="text"><span>(8965)</span> · <span>Cuentas personales</span></div>
+        <div class="small-text">Actualizado hace 11 horas</div>
+      </div>
+
+      <div class="horizontal-card">
+        <div class="text"><span>(5623)</span> · <span>Crédito</span></div>
+        <div class="small-text">Actualizado hace 11 horas</div>
+      </div>
+
+      <div class="horizontal-card">
+        <div class="text"><span>(1452)</span> · <span>Complementarias</span></div>
+        <div class="small-text">Actualizado hace 11 horas</div>
+      </div>
+
+    </div>
+
+    <paper-button class="primary" raised>Añadir entidad</paper-button>
+
+
+  </template>
+
+  <script>
+    Polymer({
+      is: 'my-entities',
+    });
+  </script>
+</dom-module>
