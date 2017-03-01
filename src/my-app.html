@@ -9,6 +9,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/platinum-https-redirect/platinum-https-redirect.html">
 <link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
 <link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
 <link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
@@ -26,144 +27,179 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
 <link rel="import" href="my-icons.html">
 
 <dom-module id="my-app">
-  <template>
-    <style>
-      :host {
-        --app-primary-color: #4285f4;
-        --app-secondary-color: #364250;
+    <template>
+        <style>
+            :host {
+                --app-primary-color: #4285f4;
+                --app-secondary-color: #364250;
 
-        display: block;
-      }
+                display: block;
+            }
 
-      app-header {
-        color: #fff;
-        background-color: white;
-      }
-      app-header paper-icon-button {
-        color: black;
-        --paper-icon-button-ink-color: white;
-      }
+            app-header {
+                color: #fff;
+                background-color: white;
+            }
 
-      .current-page {
-        color: #52BCEC;
-        font-size: 16px;
-        text-transform: capitalize;
-      }
+            app-header paper-icon-button {
+                color: black;
+                --paper-icon-button-ink-color: white;
+            }
 
-      .drawer-list {
-        margin: 0 20px;
-      }
+            .current-page {
+                color: #52BCEC;
+                font-size: 16px;
+                text-transform: capitalize;
+            }
 
-      .drawer-list a {
-        display: block;
-        padding: 0 16px;
-        text-decoration: none;
-        color: var(--app-secondary-color);
-        line-height: 40px;
-      }
+            .drawer-list {
+                margin: 0 20px;
+            }
 
-      .drawer-list a.iron-selected {
-        color: #363636;
-        font-weight: bold;
-      }
+            .drawer-list a {
+                display: block;
+                padding: 0 16px;
+                text-decoration: none;
+                color: var(--app-secondary-color);
+                line-height: 40px;
+            }
 
-      .drawer-list iron-icon {
-        color: #72767D;
-        padding-right: 6px;
-      }
-    </style>
+            .drawer-list a.iron-selected {
+                color: #363636;
+                font-weight: bold;
+            }
 
-    <app-location route="{{route}}"></app-location>
-    <app-route
-        route="{{route}}"
-        pattern="/:page"
-        data="{{routeData}}"
-        tail="{{subroute}}"></app-route>
+            .drawer-list iron-icon {
+                color: #72767D;
+                padding-right: 6px;
+            }
 
-    <app-drawer-layout fullbleed>
-      <!-- Drawer content -->
-      <app-drawer id="drawer">
-        <app-toolbar>op3n innovation</app-toolbar>
-        <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-          <a name="log-in" href="/log-in">Log in</a>
-          <a name="global-position" href="/global-position"><iron-icon icon="icons:home"></iron-icon>Global Position</a>
-          <a name="accounts" href="/accounts"><iron-icon icon="icons:credit-card"></iron-icon>Accounts and Cards</a>
-          <!--<a name="settings" href="/settings"><iron-icon icon="icons:settings"></iron-icon>Settings</a>-->
-          <a name="settings" href="/entities"><iron-icon icon="icons:settings"></iron-icon>Entities</a>
-        </iron-selector>
-      </app-drawer>
+            .footer {
+                background-color: white;
+                padding: 48px 10px;
+                font-size: 12px;
+                color: #72767D;
+                text-align: center;
+            }
+        </style>
 
-      <!-- Main content -->
-      <app-header-layout has-scrolling-region>
+        <platinum-https-redirect></platinum-https-redirect>
 
-        <app-header condenses reveals effects="waterfall">
-          <app-toolbar>
-            <paper-icon-button icon="my-icons:menu" drawer-toggle></paper-icon-button>
-            <!--<a class="back-btn" href="/list/[[categoryName]]" tabindex="-1" hidden>-->
-              <!--<paper-icon-button icon="arrow-back" aria-label="Go back"></paper-icon-button>-->
-            <!--</a>-->
-            <div main-title hidden>Op3n innovation</div>
-            <div class="current-page">[[page]]</div>
-          </app-toolbar>
-        </app-header>
+        <app-location route="{{route}}"></app-location>
+        <app-route
+                route="{{route}}"
+                pattern="/:page"
+                data="{{routeData}}"
+                tail="{{subroute}}"></app-route>
 
-        <iron-pages
-            selected="[[page]]"
-            attr-for-selected="name"
-            fallback-selection="view404"
-            role="main">
-          <my-log-in name="log-in"></my-log-in>
-          <my-global-position name="global-position"></my-global-position>
-          <my-accounts name="accounts"></my-accounts>
-          <my-settings name="settings"></my-settings>
-          <my-entities name="entities"></my-entities>
-          <my-new-entity name="new-entity"></my-new-entity>
-          <my-view404 name="view404"></my-view404>
-        </iron-pages>
-      </app-header-layout>
-    </app-drawer-layout>
-  </template>
+        <app-drawer-layout fullbleed>
+            <!-- Drawer content -->
+            <app-drawer id="drawer">
+                <app-toolbar>op3n innovation</app-toolbar>
+                <iron-selector selected="[[routeData.page]]" attr-for-selected="name" class="drawer-list" role="navigation">
+                    <a name="log-in" href="/log-in">Log in</a>
+                    <a name="global-position" href="/global-position"><iron-icon icon="icons:home"></iron-icon>Global Position</a>
+                    <a name="accounts" href="/accounts"><iron-icon icon="icons:credit-card"></iron-icon>Accounts and Cards</a>
+                    <!--<a name="settings" href="/settings"><iron-icon icon="icons:settings"></iron-icon>Settings</a>-->
+                    <a name="settings" href="/entities"><iron-icon icon="icons:settings"></iron-icon>Entities</a></iron-selector>
+            </app-drawer>
 
-  <script>
-    Polymer({
-      is: 'my-app',
+            <!-- Main content -->
+            <app-header-layout has-scrolling-region>
 
-      properties: {
-        page: {
-          type: String,
-          reflectToAttribute: true,
-          observer: '_pageChanged',
-        },
-      },
+                <app-header condenses reveals effects="waterfall">
+                    <app-toolbar>
+                        <paper-icon-button icon="my-icons:menu" drawer-toggle></paper-icon-button>
+                        <!--<a class="back-btn" href="/list/[[categoryName]]" tabindex="-1" hidden>-->
+                        <!--<paper-icon-button icon="arrow-back" aria-label="Go back"></paper-icon-button>-->
+                        <!--</a>-->
+                        <div main-title hidden>Op3n innovation</div>
+                        <div class="current-page">[[page]]</div>
+                    </app-toolbar>
+                </app-header>
 
-      observers: [
-        '_routePageChanged(routeData.page)',
-      ],
+                <iron-pages
+                        selected="[[page]]"
+                        attr-for-selected="name"
+                        fallback-selection="view404"
+                        role="main">
+                    <my-log-in name="log-in"></my-log-in>
+                    <my-global-position name="global-position"></my-global-position>
+                    <my-accounts name="accounts"></my-accounts>
+                    <my-settings name="settings"></my-settings>
+                    <my-entities name="#/entities"></my-entities>
+                    <!--<my-new-entity name="new-entity"></my-new-entity>-->
+                    <!--<my-available-entity-list name="available-entity-list"></my-available-entity-list>-->
+                    <my-user-entities name="user-entities"></my-user-entities>
+                    <my-view404 name="view404"></my-view404>
+                </iron-pages>
 
-      listeners: {
-        'change-section': '_onChangeSection',
-      },
+                <!--<footer class="footer">-->
+                    <!--<span>Made by OP3N Innovation</span>-->
+                    <!--<div class="demo-label">Demo Only</div>-->
+                <!--</footer>-->
 
-      _routePageChanged: function(page) {
-        this.page = page || 'log-in';
+            </app-header-layout>
+        </app-drawer-layout>
+    </template>
 
-        if (!this.$.drawer.persistent) {
-          this.$.drawer.close();
-        }
-      },
+    <script>
+        Polymer({
+            is: 'my-app',
 
-      _pageChanged: function(page) {
-        // Load page import on demand. Show 404 page if fails
-        var resolvedPageUrl = this.resolveUrl('my-' + page + '.html');
-        this.importHref(resolvedPageUrl, null, this._showPage404, true);
-      },
+            properties: {
+                page: {
+                    type: String,
+                    reflectToAttribute: true,
+                    observer: '_pageChanged',
+                },
+                entities: {
+                    type: Object
+                }
+            },
 
-      _showPage404: function() {
-        this.page = 'view404';
-      },
-    });
-  </script>
+            observers: [
+                '_routePageChanged(routeData.page)',
+            ],
+
+            listeners: {
+                'change-section': '_onChangeSection',
+            },
+
+            attached: function () {
+                var entitiesJson = {
+                    banks: [
+                        {id: '0123', name: 'Bankinter', userId: '05654456Z', userPassword: '123456', logo:'../images/bankinter.gif'},
+                        {id: '987', name: 'BBVA', userId: '05654456Z', userPassword: '123456', logo: '../images/0182.png'},
+                        {id: '0321', name: 'Santander', userId: '05654456Z', userPassword: '123456', logo:'../images/santander.png'}
+                    ]
+                };
+
+                this.entities = entitiesJson.banks;
+            },
+
+            _routePageChanged: function (page) {
+                this.page = page || 'log-in';
+
+                if (!this.$.drawer.persistent) {
+                    this.$.drawer.close();
+                }
+            },
+
+            _pageChanged: function (page) {
+                // Load page import on demand. Show 404 page if fails
+                var resolvedPageUrl = this.resolveUrl('my-' + page + '.html');
+                this.importHref(resolvedPageUrl, null, this._showPage404, true);
+            },
+
+            _showPage404: function () {
+                this.page = 'view404';
+            },
+        });
+    </script>
 </dom-module>

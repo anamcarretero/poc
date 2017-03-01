@@ -10,82 +10,162 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="shared-styles.html">
+<link rel="import" href="my-available-entity-list.html">
+<link rel="import" href="my-user-entities.html">
+<script type="text/javascript" src="libs/highlight.min.js"></script>
+<script type="text/javascript" src="libs/marked.js"></script>
+<script type="text/javascript" src="libs/client-oauth2.js"></script>
+<script type="text/javascript" src="libs/oauth2.js"></script>
 
 <dom-module id="my-entities">
-  <template>
-    <style include="shared-styles">
-      :host {
-        display: block;
-        padding: 12px;
-        background-color: var(--grey-color-light-grey);
-      }
+    <template>
+        <style include="shared-styles">
+            :host {
+                display: block;
+                padding: 16px;
+                background-color: var(--grey-color-light-grey);
+            }
 
-      .entity-logo {
-        --iron-image-height: 16px;
-      }
+        </style>
 
-    </style>
-
-    <div class="card">
-      <!--<h1>My entities</h1>-->
-      <!--<p>Ut labores minimum atomorum pro. Laudem tibique ut has.</p>-->
-      <iron-image class="entity-logo" src="../images/0182.png"></iron-image>
-      <div class="horizontal-card">
-        <div class="text"><span>(5896)</span> · <span>Cuentas personales</span></div>
-        <div class="small-text">Actualizado hace 11 horas</div>
-      </div>
-
-      <div class="horizontal-card">
-        <div class="text"><span>(8965)</span> · <span>Cuentas personales</span></div>
-        <div class="small-text">Actualizado hace 11 horas</div>
-      </div>
-
-      <div class="horizontal-card">
-        <div class="text"><span>(5623)</span> · <span>Crédito</span></div>
-        <div class="small-text">Actualizado hace 11 horas</div>
-      </div>
-
-      <div class="horizontal-card">
-        <div class="text"><span>(1452)</span> · <span>Complementarias</span></div>
-        <div class="small-text">Actualizado hace 11 horas</div>
-      </div>
-
-    </div>
-
-    <div class="card">
-      <!--<h1>My entities</h1>-->
-      <!--<p>Ut labores minimum atomorum pro. Laudem tibique ut has.</p>-->
-      <iron-image class="entity-logo" src="../images/bankinter.gif"></iron-image>
-      <div class="horizontal-card">
-        <div class="text"><span>(5896)</span> · <span>Cuentas personales</span></div>
-        <div class="small-text">Actualizado hace 11 horas</div>
-      </div>
-
-      <div class="horizontal-card">
-        <div class="text"><span>(8965)</span> · <span>Cuentas personales</span></div>
-        <div class="small-text">Actualizado hace 11 horas</div>
-      </div>
-
-      <div class="horizontal-card">
-        <div class="text"><span>(5623)</span> · <span>Crédito</span></div>
-        <div class="small-text">Actualizado hace 11 horas</div>
-      </div>
-
-      <div class="horizontal-card">
-        <div class="text"><span>(1452)</span> · <span>Complementarias</span></div>
-        <div class="small-text">Actualizado hace 11 horas</div>
-      </div>
-
-    </div>
-
-    <paper-button class="primary" raised>Añadir entidad</paper-button>
+        <app-route
+                route="{{route}}"
+                pattern="/:entity"
+                data="{{entityData}}"
+                tail="{{entityTail}}">
+        </app-route>
 
 
-  </template>
+        <my-available-entity-list></my-available-entity-list>
 
-  <script>
-    Polymer({
-      is: 'my-entities',
-    });
-  </script>
+        <my-user-entities entities="[[entities]]"></my-user-entities>
+
+
+        <paper-button class="primary" raised>Add Entity</paper-button>
+<!--
+        <iron-ajax
+                id="xhrConnectUris"
+                url="{{xhrConnectUrisUrl}}"
+                handle-as="json"
+                on-response="_handlerXhrConnectUrlsResponse"
+                on-error="_handlerXhrConnectUrlsErrorResponse">
+        </iron-ajax>-->
+        <iron-ajax
+                id="xhrConnectUris"
+                handle-as="json"
+                with-credentials="true"
+                url=https://dev.connect.bbvaop3n.com/token?grant_type=authorization_code&code=FxLos5&redirect_uri=http://localhost:5000"
+                methos="POST"
+                headers="Authorization':'Basic YXBwLmJidmEuYWdncmVnYXRvcnM6ZnpZVFgqWmU5RFJARHNqJWx6eDhhSks3QkZjbnRGaHRQKndCMjMxdFJlcnNwUmJMUkFVVGpCUUZkJXB5eCRiUQ=='">
+
+        </iron-ajax>
+
+    </template>
+
+    <script>
+        var ENTITY = {
+                    bbva: 'bbva',
+                    compass: 'compass'
+                },
+//            REDIRECT_URI = "/documentation/bbva/oauth2",
+                REDIRECT_URI = '/bbva-connect',
+                SIGNUP_URL = '/signUpConnect',
+                API_URL = '/api';
+
+        Polymer({
+            is: 'my-entities',
+
+            properties: {
+
+                xhrConnectUrisUrl: {
+                    type: String,
+                    value: 'https://connect.bbva.com/bbvaconnect'
+                },
+                entities: {
+                    type: Object,
+                    observer: '_entitiesChanged'
+                },
+                access_token_uri: {
+                    type: String,
+                    value: ''
+                },
+                app_id: {
+                    type: String,
+                    value: 'app.bbva.amkt.signup'
+                }
+            },
+
+            attached: function () {
+                this.entities = [
+                    {id: '0123', name: 'Bankinter', userId: '05654456Z', userPassword: '123456', logo:'../images/bankinter.gif'},
+                    {id: '987', name: 'BBVA', userId: '05654456Z', userPassword: '123456', logo: '../images/0182.png'},
+                    {id: '0321', name: 'Santander', userId: '05654456Z', userPassword: '123456', logo:'../images/santander.png'}
+                ];
+                this.$.xhrConnectUris.generateRequest();
+            },
+
+            _entitiesChanged: function () {
+                console.log('entities in my-entities page');
+            },
+
+            /*_signUpWithConnect: function () {
+                var that = this;
+                var grant = 'code';
+
+                var pathArray = location.href.split('/');
+                var protocol = pathArray[0];
+                var host = pathArray[2];
+                var url = protocol + '//' + host;
+
+                var credentials = {
+                    clientId: that.app_id,
+                    grant: grant
+                }
+
+                var settings = {
+                    accessTokenUri: 'https://dev.connect.bbvaop3n.com/token',
+                    authorizationUri: 'https://dev.connect.bbvaop3n.com/token/authorize',
+                    authorizationGrants: ['credentials'],
+                    redirectUri: 'https://localhost:8080/documentation/bbva/oauth2',
+                    scopes: [],
+                    actionParams: {toDomain: that.to_domain},
+                    third_party_user_id: that.entity === ENTITY.bbva ? null : that.app_id,
+                }
+                var oauth2 = new Oauth2({}, credentials, settings);
+                var options = {
+                    method: 'GET',
+                    url: url + this._getQueryString(),
+//          url: 'new-entity',
+                    data: null,
+                    headers: {Accept: "application/json", 'X-Unique-Transaction-ID': String(Date.now())},
+                    actionParams: {toDomain: that.to_domain}
+                };
+
+                // authentication and send request
+                oauth2.authenticate(options, function (xhr, err, data) {
+                    //Set the initial values of register form
+                    that.querySelector('amkt-register-form').initialValues = xhr.body;
+
+                });
+
+            },*/
+
+            _getQueryString: function () {
+                var that = this;
+                return '/me-basic?action=resource&to_domain=' + btoa(that.customer_uri);
+            },
+
+           /* _handlerXhrConnectUrlsResponse: function (e, detail) {
+                var that = this;
+                var connectUris = detail.response;
+                that.access_token_uri = connectUris.access_token_uri;
+                that.authorize_uri = connectUris.authorize_uri;
+                that.app_id = connectUris.app_id;
+                that.to_domain = connectUris.to_domain;
+                that.customer_uri = connectUris.customer_uri;
+
+            }*/
+
+        });
+    </script>
 </dom-module>
