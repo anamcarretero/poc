@@ -1,0 +1,37 @@
+{
+  "result": {
+    "code": 200,
+    "info": "OK"
+  },
+  "data": {
+    "accounts": [
+      {
+        "id": "ES0182002000000000500000000332025505XXXXXXXXX",
+        "type": "CHECKING",
+        "description": "BBVA CHECKING ACCOUNT",
+        "number": "8486",
+        "balance": 0,
+        "currency": "EUR",
+        "links": {
+          "detail": {
+            "href": "https://dev.apis.bbvaop3n.com/accounts-sbx/v1/me/accounts/ES0182002000000000500000000332025505XXXXXXXXX"
+          }
+        }
+      },
+      {
+        "id": "ES0182002000000000500000000332046493XXXXXXXXX",
+        "alias": "ALIAS ACCOUNT",
+        "type": "CHECKING",
+        "description": "BBVA CHECKING ACCOUNT",
+        "number": "1437",
+        "balance": 6000.2,
+        "currency": "EUR",
+        "links": {
+          "detail": {
+            "href": "https://dev.apis.bbvaop3n.com/accounts-sbx/v1/me/accounts/ES0182002000000000500000000332046493XXXXXXXXX"
+          }
+        }
+      }
+    ]
+  }
+}

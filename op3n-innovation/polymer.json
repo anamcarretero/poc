@@ -1,0 +1,23 @@
+{
+  "entrypoint": "index.html",
+  "shell": "src/my-app.html",
+  "fragments": [
+    "src/my-log-in.html",
+    "src/my-global-position.html",
+    "src/my-accounts.html",
+    "src/my-settings.html",
+    "src/my-entities.html",
+    "src/my-available-entity-list.html",
+    "src/my-user-entities.html",
+    "src/my-view404.html"
+  ],
+  "sourceGlobs": [
+    "src/**/*",
+    "images/**/*",
+    "bower.json"
+  ],
+  "includeDependencies": [
+    "manifest.json",
+    "bower_components/webcomponentsjs/webcomponents-lite.min.js"
+  ]
+}

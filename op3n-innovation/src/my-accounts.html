@@ -1,0 +1,82 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="my-accounts">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+
+        padding: 10px;
+      }
+
+      .horizontal-card {
+        min-height: 50px;
+      }
+
+      .account-logo {
+        --iron-image-height: 32px;
+        padding: 7px;
+      }
+    </style>
+
+    <iron-ajax
+            auto
+            url="../data/accounts-bbva.json"
+            handle-as="json"
+            loading="{{loading}}"
+            last-response="{{lastResponse}}"
+            on-response="_handleResponse"></iron-ajax>
+
+    <div class="card">
+      <iron-image class="account-logo" src="../images/0182.png"></iron-image>
+      <template is="dom-repeat" items="[[bbvaAccounts]]">
+        <div class="horizontal-card horizontal-flex">
+          <div class="text flex">
+            <span>([[item.number]])</span> · <span class="capitalized">[[_conputeDescription(item.description)]]</span>
+          </div>
+          <div class="text"><span>[[item.balance]]</span> <span class="small-text">[[item.currency]]</span></div>
+        </div>
+      </template>
+    </div>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'my-accounts',
+
+      properties: {
+        bbvaAccounts: {
+          type: Array,
+          value: []
+        }
+      },
+
+      _handleResponse:function() {
+        this.lastResponse= this.lastResponse.data;
+        console.log(this.lastResponse);
+        this.set('bbvaAccounts', this.lastResponse.accounts);
+      },
+
+      _conputeDescription: function(text) {
+        if(text !== undefined) {
+          var splitedText = text.split(' ');
+          if(splitedText[0]!==undefined && splitedText[0].toLowerCase() === 'bbva') {
+            return text.toLowerCase().substr(5);
+          }
+        }
+      }
+
+    });
+  </script>
+</dom-module>

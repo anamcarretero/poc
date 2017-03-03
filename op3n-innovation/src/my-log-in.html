@@ -1,0 +1,81 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="my-log-in">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+        padding: 16px;
+        background-color: white;
+        max-width: 500px;
+        box-sizing: border-box;
+        margin: 0 auto;
+        min-height: 503px;
+      }
+      .help-block {
+        text-align: center;
+        max-width: 392px;
+        font-size: 12px;
+        margin: 24px auto;
+        color: var(--grey-color-blue-light-grey);
+      }
+      .horizontal {
+        margin: 12px 0;
+      }
+    </style>
+
+    <!--<div class="card">-->
+      <!--<div class="circle">1</div>-->
+      <!--<h1>View One</h1>-->
+      <!--<p>Ut labores minimum atomorum pro. Laudem tibique ut has.</p>-->
+      <!--<p>Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit.</p>-->
+    <!--</div>-->
+
+    <h1>Great to see you again!</h1>
+
+    <form is="iron-form" id="form" method="post" action="">
+      <paper-input-container>
+        <label>User</label>
+        <input is="iron-input" value="{{userName::change}}">
+      </paper-input-container>
+      <paper-input-container>
+        <label>Password</label>
+        <input type="password" is="iron-input">
+      </paper-input-container>
+
+      <!--<paper-input label="user" type="text"></paper-input>-->
+      <!--<paper-input label="password input" type="password"></paper-input>-->
+      <a class="button-link" href="/global-position"><paper-button class="primary" raised>Log in</paper-button></a>
+    </form>
+    <div class="help-block">
+      <div class="horizontal"><a class="link" on-tap="onTap">Forgot Password?</a></div>
+      <div class="horizontal">Don't have an account? <a class="link" on-tap="onTap">Get started</a></div>
+    </div>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'my-log-in',
+      properties: {
+        userName: {
+          type: String,
+          notify: true
+        }
+      },
+      onTap: function(event) {
+        event.preventDefault();
+      }
+    });
+  </script>
+</dom-module>

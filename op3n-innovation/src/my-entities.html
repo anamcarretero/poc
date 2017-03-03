@@ -1,0 +1,181 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="shared-styles.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link type="text/javascript" href="../bower_components/auth0.js/build/auth0.min.js">
+<!--<link rel="import" href="my-available-entity-list.html">-->
+<!--<link rel="import" href="my-user-entities.html">-->
+<!--<script type="text/javascript" src="libs/highlight.min.js"></script>-->
+<!--<script type="text/javascript" src="libs/marked.js"></script>-->
+<!--<script type="text/javascript" src="libs/client-oauth2.js"></script>-->
+<!--<script type="text/javascript" src="libs/oauth2.js"></script>-->
+
+<dom-module id="my-entities">
+    <template>
+        <style include="shared-styles">
+            :host {
+                display: block;
+                padding: 16px;
+                background-color: var(--grey-color-light-grey);
+            }
+
+        </style>
+
+        <app-route
+                route="{{route}}"
+                pattern="/:entity"
+                data="{{entityData}}"
+                tail="{{entityTail}}">
+        </app-route>
+
+
+        <!--<my-available-entity-list></my-available-entity-list>-->
+
+        <!--<my-user-entities entities="[[entities]]"></my-user-entities>-->
+
+
+        <paper-button class="primary" raised on-tap="_obtainCode">Add Entity</paper-button>
+
+        <!--<iron-ajax-->
+                <!--id="xhrConnectUris"-->
+                <!--url="{{xhrConnectUrisUrl}}"-->
+                <!--handle-as="json"-->
+                <!--on-response="_handlerXhrConnectUrlsResponse"-->
+                <!--on-error="_handlerXhrConnectUrlsErrorResponse">-->
+        <!--</iron-ajax>-->
+        <!--<iron-ajax-->
+                <!--id="xhrConnectUris"-->
+                <!--handle-as="json"-->
+                <!--with-credentials="true"-->
+                <!--url="https://dev.connect.bbvaop3n.com/token?grant_type=authorization_code&code=FxLos5&redirect_uri=http://localhost:8080"-->
+                <!--methos="POST"-->
+                <!--headers="Authorization':'Basic YXBwLmJidmEuYWdncmVnYXRvcnM6ZnpZVFgqWmU5RFJARHNqJWx6eDhhSks3QkZjbnRGaHRQKndCMjMxdFJlcnNwUmJMUkFVVGpCUUZkJXB5eCRiUQ=='">-->
+
+        <!--https://dev.connect.bbvaop3n.com/bbvaconnect?client_id=app.bbva.aggregators&response_type=code&redirect_uri=http://localhost:8080-->
+
+
+        <!--<iron-ajax-->
+                <!--id="xhrConnectUris"-->
+                <!--handle-as="json"-->
+                <!--content-type="application/json"-->
+                <!--url="https://dev.openp.zuul.digitalservices.es:8989/clientapi-sbx-aggregator-v1/bbva/token?code=6rS4pr"-->
+                <!--method= "GET"-->
+                <!--last-response="_handleResponse"></iron-ajax>-->
+        <!--headers="{'Authorization':'Basic YXBwLmJidmEuYWdncmVnYXRvcnM6ZnpZVFgqWmU5RFJARHNqJWx6eDhhSks3QkZjbnRGaHRQKndCMjMxdFJlcnNwUmJMUkFVVGpCUUZkJXB5eCRiUQ=='}"-->
+        <!--with-credentials="true"-->
+
+        <!--<iron-ajax-->
+                <!--id="xhrConnectUris"-->
+                <!--url= "{{xhrConnectUrisUrl}}"-->
+                <!--handle-as="json"-->
+                <!--on-response="_handlerXhrConnectUrlsResponse"-->
+                <!--on-error = "_handlerXhrConnectUrlsErrorResponse">-->
+        <!--</iron-ajax>-->
+
+        <!--<o-auth service="https://dev.connect.bbvaop3n.com"-->
+                <!--client="app.bbva.aggregators"-->
+                <!--listen="oauth=bbvaconnect"-->
+                <!--params="redirect_uri=https://localhost:5000"-->
+                <!--id="oauthbbva">-->
+
+        <!--</o-auth>-->
+
+
+    </template>
+    <script type="text/javascript" src="https://cdn.auth0.com/js/auth0/8.0.4/auth0.min.js"></script>
+    <script>
+
+        Polymer({
+            is: 'my-entities',
+
+            properties: {
+
+                xhrConnectUrisUrl: {
+                    type: String,
+                    value: 'https://dev.connect.bbvaop3n.com/bbvaconnect?scope=&'
+                },
+                entity: {
+                    type: String,
+                    value: 'bbva'
+                },
+                entities: {
+                    type: Object
+                },
+                access_token_uri: {
+                    type: String,
+                    value: ''
+                },
+                app_id: {
+                    type: String,
+                    value: 'app.bbva.aggregators'
+                },
+
+                code: {
+                    type: String,
+                    observer: '_codeChanged'
+                }
+            },
+
+            attached: function () {
+                this.entities = [
+                    {id: '0123', name: 'Bankinter', userId: '05654456Z', userPassword: '123456', logo:'../images/bankinter.gif'},
+                    {id: '987', name: 'BBVA', userId: '05654456Z', userPassword: '123456', logo: '../images/0182.png'},
+                    {id: '0321', name: 'Santander', userId: '05654456Z', userPassword: '123456', logo:'../images/santander.png'}
+                ];
+//                var window = window.open('https://dev.connect.bbvaop3n.com/bbvaconnect?scope=&client_id=app.bbva.aggregators&redirect_uri=https://localhost:5000&response_type=code', '_blank');
+
+//                var webAuth = new auth0.WebAuth({
+//                    domain:       'https://dev.connect.bbvaop3n.com/',
+//                    clientID:     'app.bbva.aggregators',
+//                    redirectUri:   'https://localhost:5000',
+//                    responseType:   'code'
+//                });
+//
+//                webAuth.authorize({
+//                    connection: 'bbvaconnect'
+//                });
+//
+//                webAuth.popup.authorize({
+//                    connection: 'bbvaconnect'
+//                });
+            },
+
+            _obtainCode: function() {
+                var webAuth = new auth0.WebAuth({
+                    domain:       'dev.connect.bbvaop3n.com/bbvaconnect?scope=&',
+                    clientID:     'app.bbva.aggregators',
+                    redirectUri:   'https://localhost:5000/settings',
+                    responseType:   'code'
+                });
+
+                webAuth.popup.authorize({
+                    connection: 'bbvaconnect'
+                });
+
+                auth0.parseHash(window.location.hash, function(err, authResult) {
+                    if (err) {
+                        return console.log(err);
+                    }
+
+                    auth0.client.userInfo(authResult.accessToken, function(err, user) {
+                        // Now you have the user's information
+                    });
+                });
+            },
+
+            _codeChanged: function() {
+                console.log('code changed');
+            }
+
+        });
+    </script>
+</dom-module>

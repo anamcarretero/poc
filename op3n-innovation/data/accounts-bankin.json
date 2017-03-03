@@ -1,0 +1,106 @@
+{
+  "result": {
+    "code": 200,
+    "info": "OK"
+  },
+  "data": {
+    "accounts": [
+      {
+        "id": "7297321",
+        "type": "loan",
+        "description": "Compte Crédit Immobilier",
+        "balance": 140200,
+        "currency": "EUR",
+        "links": {
+          "detail": {
+            "href": "https://sync.bankin.com/v2/accounts/7297321"
+          }
+        }
+      },
+      {
+        "id": "7297320",
+        "type": "securities",
+        "description": "Compte Titres",
+        "balance": 8700,
+        "currency": "EUR",
+        "links": {
+          "detail": {
+            "href": "https://sync.bankin.com/v2/accounts/7297320"
+          }
+        }
+      },
+      {
+        "id": "7297319",
+        "type": "savings",
+        "description": "Compte Épargne",
+        "balance": 6900,
+        "currency": "EUR",
+        "links": {
+          "detail": {
+            "href": "https://sync.bankin.com/v2/accounts/7297319"
+          }
+        }
+      },
+      {
+        "id": "7297318",
+        "type": "checking",
+        "description": "Compte Courant",
+        "balance": 1037,
+        "currency": "EUR",
+        "links": {
+          "detail": {
+            "href": "https://sync.bankin.com/v2/accounts/7297318"
+          }
+        }
+      },
+      {
+        "id": "7296912",
+        "type": "loan",
+        "description": "Compte Crédit Immobilier",
+        "balance": 140200,
+        "currency": "EUR",
+        "links": {
+          "detail": {
+            "href": "https://sync.bankin.com/v2/accounts/7296912"
+          }
+        }
+      },
+      {
+        "id": "7296911",
+        "type": "securities",
+        "description": "Compte Titres",
+        "balance": 8700,
+        "currency": "EUR",
+        "links": {
+          "detail": {
+            "href": "https://sync.bankin.com/v2/accounts/7296911"
+          }
+        }
+      },
+      {
+        "id": "7296910",
+        "type": "savings",
+        "description": "Compte Épargne",
+        "balance": 6900,
+        "currency": "EUR",
+        "links": {
+          "detail": {
+            "href": "https://sync.bankin.com/v2/accounts/7296910"
+          }
+        }
+      },
+      {
+        "id": "7296903",
+        "type": "checking",
+        "description": "Compte Courant",
+        "balance": 1037,
+        "currency": "EUR",
+        "links": {
+          "detail": {
+            "href": "https://sync.bankin.com/v2/accounts/7296903"
+          }
+        }
+      }
+    ]
+  }
+}

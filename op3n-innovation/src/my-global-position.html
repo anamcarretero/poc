@@ -1,0 +1,123 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="my-global-position">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+        padding: 16px;
+      }
+      .help-block {
+        text-align: center;
+        max-width: 392px;
+        font-size: 12px;
+        margin: 24px auto;
+        color: var(--grey-color-blue-light-grey);
+      }
+      .horizontal {
+        margin: 12px 0;
+      }
+
+      iron-icon {
+        color: #72767D;
+        margin-right: 8px;
+      }
+
+      .circle-list {
+        text-align: center;
+      }
+
+      .circle {
+        display: inline-block;
+        height:144px;
+        width: 144px;
+        border-radius: 50%;
+        box-sizing: border-box;
+        margin: 8px;
+        padding: 40px 0;
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+        border: 8px solid rgba(255,255,255,0.2);
+      }
+
+      .circle.green {
+        background-color: var(--secondary-color-green-dark);
+      }
+
+      .circle.pink {
+        background-color: var(--secondary-color-magenta);
+      }
+
+      .circle * {
+        color: white;
+      }
+
+      .circle .text {
+        font-size: 24px;
+        line-height: 32px;
+      }
+
+      .cicle .small-text {
+        line-height: 16px;
+      }
+
+    </style>
+
+    <div class="card">
+      <div class="horizontal-card horizontal-flex">
+        <div class="text flex">
+          <div class="small-text">ACCOUNT BALANCES</div>
+          <div class="large-text">2123,78<span class="text"> €</span></div>
+        </div>
+        <div class="text flex">
+          <div class="small-text">CARD BALANCES</div>
+          <div class="large-text">602,23<span class="text"> €</span></div>
+        </div>
+      </div>
+
+      <div class="horizontal-card horizontal-flex">
+        <a class="link">
+          <iron-icon icon="icons:list"></iron-icon>Your transactions</a>
+      </div>
+      <div class="horizontal-card horizontal-flex">
+        <a class="link">
+          <iron-icon icon="icons:credit-card"></iron-icon>Your accounts</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="circle-list">
+        <div class="circle pink">
+          <div class="text">132,97<span>€</span></div>
+          <div class="small-text">March Outgoings</div>
+        </div>
+
+        <div class="circle green">
+          <div class="text">1782,97<span>€</span></div>
+          <div class="small-text">March Income</div>
+        </div>
+      </div>
+
+    </div>
+
+  </template>
+
+  <script>
+    Polymer({
+      is: 'my-global-position',
+      onTap: function(event) {
+        event.preventDefault();
+      }
+    });
+  </script>
+</dom-module>
