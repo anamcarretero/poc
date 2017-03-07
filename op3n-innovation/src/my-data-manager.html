@@ -1,0 +1,104 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-signals/iron-signals.html">
+
+
+<dom-module id="my-data-manager">
+  <template>
+    <iron-signals on-iron-signal-new-entity="addBBVAEntity"></iron-signals>
+    <iron-ajax
+            id="ironAjax"
+            url="../data/accounts-bbva.json"
+            handle-as="json"
+            loading="{{loading}}"
+            on-response="_handleResponse"></iron-ajax>
+  </template>
+  <script>
+    Polymer({
+      is: 'my-data-manager',
+      properties: {
+        entities: {
+          type: Array,
+          value: [],
+          notify: true
+        },
+
+        globalPosition: {
+          type: Array,
+          value: [],
+          notify: true
+        },
+        currentEntity: String
+
+      },
+
+      addBBVAEntity: function(event, detail, sender) {
+        console.log('asd', detail);
+        var entity = detail.split('-')[0];
+        var resource = detail.split('-')[1];
+        this.currentEntity = entity;
+        if(entity==='bbva') {
+          this.$.ironAjax.url = '../data/' + resource + '-' + entity + '.json';
+        }
+        else {
+          this.$.ironAjax.url = '../data/' + resource + '-' + 'bankin.json';
+        }
+        this.$.ironAjax.onResponse= '_handle'+ resource + 'Response';
+        this.$.ironAjax.generateRequest();
+      },
+
+      _handleResponse: function(event, detail) {
+        if(detail.response.data.accounts) {
+          var entity = { name: this.currentEntity, accounts: [], logo: this.currentEntity.concat('-logo.png')};
+          var accounts = detail.response.data.accounts;
+
+          if(this.currentEntity.toLowerCase() !== 'bbva') {
+            accounts = this._setNumber(accounts)
+          }
+
+          entity.accounts = accounts;
+          this.push('entities', entity);
+
+          this._updateGlobalPosition();
+        }
+      },
+
+      _setNumber: function(accounts) {
+        var i=0;
+        for(i; i<accounts.length; i++) {
+          accounts[i].number = accounts[i].id.substr(3, 4);
+        }
+        return accounts;
+      },
+
+      _updateGlobalPosition: function() {
+        console.log(this.entities);
+        var name = this.currentEntity;
+        var entity = this.entities.find(function(entity) {
+          return entity.name === name;
+        });
+
+        var i = 0, balance=0;
+        for(i; i< entity.accounts.length; i++) {
+          balance += Number(entity.accounts[i].balance);
+        }
+
+        var position = {name: this.currentEntity, balance: balance, logo: entity.name.concat('-app.png')};
+        this.push('globalPosition', position);
+
+        console.log(this.globalPosition);
+
+
+      }
+    });
+  </script>
+</dom-module>

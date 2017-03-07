@@ -10,7 +10,7 @@
     "iron-flex-layout": "PolymerElements/iron-flex-layout#^1.0.0",
     "iron-icon": "PolymerElements/iron-icon#^1.0.0",
     "iron-iconset-svg": "PolymerElements/iron-iconset-svg#^1.0.0",
-    "iron-localstorage": "PolymerElements/iron-localstorage#^1.0.0",
+    "iron-localstorage": "^1.0.6",
     "iron-media-query": "PolymerElements/iron-media-query#^1.0.0",
     "iron-pages": "PolymerElements/iron-pages#^1.0.0",
     "iron-selector": "PolymerElements/iron-selector#^1.5.2",
@@ -24,8 +24,8 @@
     "platinum-https-redirect": "PolymerElements/platinum-https-redirect#^1.0.2",
     "paper-listbox": "PolymerElements/paper-listbox#^1.1.2",
     "paper-item": "PolymerElements/paper-item#^1.2.1",
-    "o-auth": "fentas/o-auth#^0.1.2",
-    "auth0.js": "^8.3.0"
+    "oauth-js": "oauthio-web#^0.6.1",
+    "nvd3-elements": "^0.20.0"
   },
   "devDependencies": {
     "web-component-tester": "^4.0.0"

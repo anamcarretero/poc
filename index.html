@@ -47,6 +47,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <meta name="msapplication-TileColor" content="#3f51b5">
     <meta name="msapplication-tap-highlight" content="no">
 
+
+    <link type="text/javascript" href="bower_components/oauth-js/dist/oauth.js">
     <script>
       // Setup Polymer options
       window.Polymer = {
@@ -89,7 +91,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       // Load pre-caching Service Worker
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', function() {
-          navigator.serviceWorker.register('/service-worker.js');
+//          navigator.serviceWorker.register('/service-worker.js');
         });
       }
     </script>

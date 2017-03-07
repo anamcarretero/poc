@@ -1,0 +1,115 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-signals/iron-signals.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="my-available-entity-list">
+  <template>
+    <style include="shared-styles">
+
+      :host {
+        display: block;
+        height: auto;
+        visibility: visible;
+        transition: height 0.3s linear 0s;
+      }
+
+      :host([hidden]) {
+        display: block;
+        height: 0;
+        visibility: hidden;
+        transition: height 0.3s linear 0s;
+      }
+
+      .card .list-box {
+        margin-left: -16px;
+        margin-right: -16px;
+        display: block;
+      }
+
+      .list-box-item {
+        line-height: 48px;
+        display: block;
+        margin-top: -1px;
+        border-top: 1px solid var(--grey-color-light-grey);
+        border-bottom: 1px solid var(--grey-color-light-grey);
+        color: var(--primary-color-blue-4);
+      }
+
+      .list-box-item:hover {
+        color: var(--primary-color-blue-6);
+        cursor: pointer;
+      }
+
+    </style>
+
+    <div class="card">
+      <h1>Let's start!</h1>
+      <h2>Choose an entity.</h2>
+      <paper-list-box class="list-box" selected="0">
+        <paper-item class="list-box-item">
+          <div on-tap="_signUpWithConnect">BBVA</div>
+        </paper-item>
+        <paper-item class="list-box-item">
+          <div on-tap="_signUpWithBankin" id="bankinter">Bankinter</div>
+        </paper-item>
+        <paper-item class="list-box-item">
+          <div on-tap="_signUpWithBankin" id="sabadell">Banc Sabadell</div>
+        </paper-item>
+        <paper-item class="list-box-item">
+          <div>Banco santarder</div>
+        </paper-item>
+        <paper-item class="list-box-item">
+          <div>La Caixa</div>
+        </paper-item>
+        <paper-item class="list-box-item">
+          <div>Ibercaja</div>
+        </paper-item>
+        <paper-item class="list-box-item">
+          <div>Banco Popular</div>
+        </paper-item>
+        <paper-item class="list-box-item">
+          <div>Bankia</div>
+        </paper-item>
+        <paper-item class="list-box-item">
+          <div>Banesto</div>
+        </paper-item>
+      </paper-list-box>
+    </div>
+
+  </template>
+
+  <script>
+
+
+
+
+    Polymer({
+      is: 'my-available-entity-list',
+
+      attributes: {
+        active: Boolean
+      },
+      _signUpWithConnect: function() {
+        this._requestNewBank('new-entity','bbva-accounts');
+      },
+
+      _signUpWithBankin: function(event) {
+        this._requestNewBank('new-entity',event.target.id.concat('-accounts'));
+      },
+
+      _requestNewBank: function(name, data) {
+        this.fire('iron-signal', {name: name, data: data});
+      }
+    });
+  </script>
+</dom-module>

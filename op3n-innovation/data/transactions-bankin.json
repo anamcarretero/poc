@@ -1,0 +1,330 @@
+{
+  "result": {
+    "code": 200,
+    "info": "OK"
+  },
+  "data": {
+    "accountTransactions": [
+      {
+        "id": "38000005137801",
+        "amount": -28,
+        "currency": "EUR",
+        "description": "Transaction280217",
+        "operationDate": "2017-02-28",
+        "valueDate": "2017-02-28T14:01:45.814Z",
+        "category": {
+          "id": "160",
+          "name": "Misc. expenses"
+        },
+        "subCategory": {
+          "id": "1",
+          "name": "Uncategorized"
+        }
+      },
+      {
+        "id": "38000005068558",
+        "amount": -26,
+        "currency": "EUR",
+        "description": "Transaction260217",
+        "operationDate": "2017-02-26",
+        "valueDate": "2017-02-27T12:32:26.405Z",
+        "category": {
+          "id": "160",
+          "name": "Misc. expenses"
+        },
+        "subCategory": {
+          "id": "1",
+          "name": "Uncategorized"
+        }
+      },
+      {
+        "id": "38000005068559",
+        "amount": -25,
+        "currency": "EUR",
+        "description": "Transaction250217",
+        "operationDate": "2017-02-25",
+        "valueDate": "2017-02-27T12:32:26.414Z",
+        "category": {
+          "id": "160",
+          "name": "Misc. expenses"
+        },
+        "subCategory": {
+          "id": "1",
+          "name": "Uncategorized"
+        }
+      },
+      {
+        "id": "38000005068560",
+        "amount": -24,
+        "currency": "EUR",
+        "description": "Transaction240217",
+        "operationDate": "2017-02-24",
+        "valueDate": "2017-02-27T12:32:26.421Z",
+        "category": {
+          "id": "160",
+          "name": "Misc. expenses"
+        },
+        "subCategory": {
+          "id": "1",
+          "name": "Uncategorized"
+        }
+      },
+      {
+        "id": "38000005068561",
+        "amount": -23,
+        "currency": "EUR",
+        "description": "Transaction230217",
+        "operationDate": "2017-02-23",
+        "valueDate": "2017-02-27T12:32:26.430Z",
+        "category": {
+          "id": "160",
+          "name": "Misc. expenses"
+        },
+        "subCategory": {
+          "id": "1",
+          "name": "Uncategorized"
+        }
+      },
+      {
+        "id": "38000005068562",
+        "amount": -22,
+        "currency": "EUR",
+        "description": "Transaction220217",
+        "operationDate": "2017-02-22",
+        "valueDate": "2017-02-27T12:32:26.438Z",
+        "category": {
+          "id": "160",
+          "name": "Misc. expenses"
+        },
+        "subCategory": {
+          "id": "1",
+          "name": "Uncategorized"
+        }
+      },
+      {
+        "id": "38000005068563",
+        "amount": -21,
+        "currency": "EUR",
+        "description": "Transaction210217",
+        "operationDate": "2017-02-21",
+        "valueDate": "2017-02-27T12:32:26.446Z",
+        "category": {
+          "id": "160",
+          "name": "Misc. expenses"
+        },
+        "subCategory": {
+          "id": "1",
+          "name": "Uncategorized"
+        }
+      },
+      {
+        "id": "38000005068564",
+        "amount": -20,
+        "currency": "EUR",
+        "description": "Transaction200217",
+        "operationDate": "2017-02-20",
+        "valueDate": "2017-02-27T12:32:26.454Z",
+        "category": {
+          "id": "160",
+          "name": "Misc. expenses"
+        },
+        "subCategory": {
+          "id": "1",
+          "name": "Uncategorized"
+        }
+      },
+      {
+        "id": "38000005068565",
+        "amount": -19,
+        "currency": "EUR",
+        "description": "Transaction190217",
+        "operationDate": "2017-02-19",
+        "valueDate": "2017-02-27T12:32:26.464Z",
+        "category": {
+          "id": "160",
+          "name": "Misc. expenses"
+        },
+        "subCategory": {
+          "id": "1",
+          "name": "Uncategorized"
+        }
+      },
+      {
+        "id": "38000005068566",
+        "amount": -18,
+        "currency": "EUR",
+        "description": "Transaction180217",
+        "operationDate": "2017-02-18",
+        "valueDate": "2017-02-27T12:32:26.472Z",
+        "category": {
+          "id": "160",
+          "name": "Misc. expenses"
+        },
+        "subCategory": {
+          "id": "1",
+          "name": "Uncategorized"
+        }
+      },
+      {
+        "id": "38000005068567",
+        "amount": -17,
+        "currency": "EUR",
+        "description": "Transaction170217",
+        "operationDate": "2017-02-17",
+        "valueDate": "2017-02-27T12:32:26.480Z",
+        "category": {
+          "id": "160",
+          "name": "Misc. expenses"
+        },
+        "subCategory": {
+          "id": "1",
+          "name": "Uncategorized"
+        }
+      },
+      {
+        "id": "38000005068568",
+        "amount": -16,
+        "currency": "EUR",
+        "description": "Transaction160217",
+        "operationDate": "2017-02-16",
+        "valueDate": "2017-02-27T12:32:26.495Z",
+        "category": {
+          "id": "161",
+          "name": "Home"
+        },
+        "subCategory": {
+          "id": "218",
+          "name": "Gas"
+        }
+      },
+      {
+        "id": "38000005068569",
+        "amount": -15,
+        "currency": "EUR",
+        "description": "Transaction150217",
+        "operationDate": "2017-02-15",
+        "valueDate": "2017-02-27T12:32:26.505Z",
+        "category": {
+          "id": "161",
+          "name": "Home"
+        },
+        "subCategory": {
+          "id": "221",
+          "name": "Office improvement"
+        }
+      },
+      {
+        "id": "38000005068570",
+        "amount": -14,
+        "currency": "EUR",
+        "description": "Transaction140217",
+        "operationDate": "2017-02-14",
+        "valueDate": "2017-02-27T12:32:26.513Z",
+        "category": {
+          "id": "160",
+          "name": "Misc. expenses"
+        },
+        "subCategory": {
+          "id": "1",
+          "name": "Uncategorized"
+        }
+      },
+      {
+        "id": "38000005068571",
+        "amount": -13,
+        "currency": "EUR",
+        "description": "Transaction130217",
+        "operationDate": "2017-02-13",
+        "valueDate": "2017-02-27T12:32:26.521Z",
+        "category": {
+          "id": "160",
+          "name": "Misc. expenses"
+        },
+        "subCategory": {
+          "id": "1",
+          "name": "Uncategorized"
+        }
+      },
+      {
+        "id": "38000005068572",
+        "amount": -12,
+        "currency": "EUR",
+        "description": "Transaction120217",
+        "operationDate": "2017-02-12",
+        "valueDate": "2017-02-27T12:32:26.529Z",
+        "category": {
+          "id": "160",
+          "name": "Misc. expenses"
+        },
+        "subCategory": {
+          "id": "1",
+          "name": "Uncategorized"
+        }
+      },
+      {
+        "id": "38000005068573",
+        "amount": -11,
+        "currency": "EUR",
+        "description": "Transaction110217",
+        "operationDate": "2017-02-11",
+        "valueDate": "2017-02-27T12:32:26.538Z",
+        "category": {
+          "id": "160",
+          "name": "Misc. expenses"
+        },
+        "subCategory": {
+          "id": "1",
+          "name": "Uncategorized"
+        }
+      },
+      {
+        "id": "38000005068574",
+        "amount": -10,
+        "currency": "EUR",
+        "description": "Transaction100217",
+        "operationDate": "2017-02-10",
+        "valueDate": "2017-02-27T12:32:26.549Z",
+        "category": {
+          "id": "160",
+          "name": "Misc. expenses"
+        },
+        "subCategory": {
+          "id": "1",
+          "name": "Uncategorized"
+        }
+      },
+      {
+        "id": "38000005068575",
+        "amount": -9,
+        "currency": "EUR",
+        "description": "Transaction090217",
+        "operationDate": "2017-02-09",
+        "valueDate": "2017-02-27T12:32:26.558Z",
+        "category": {
+          "id": "160",
+          "name": "Misc. expenses"
+        },
+        "subCategory": {
+          "id": "1",
+          "name": "Uncategorized"
+        }
+      },
+      {
+        "id": "38000005068576",
+        "amount": -8,
+        "currency": "EUR",
+        "description": "Transaction080217",
+        "operationDate": "2017-02-08",
+        "valueDate": "2017-02-27T12:32:26.567Z",
+        "category": {
+          "id": "160",
+          "name": "Misc. expenses"
+        },
+        "subCategory": {
+          "id": "1",
+          "name": "Uncategorized"
+        }
+      }
+    ]
+  }
+}

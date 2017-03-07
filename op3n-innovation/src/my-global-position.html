@@ -10,6 +10,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="shared-styles.html">
+<link rel="import" href="../bower_components/nvd3-elements/nvd3-donut.html">
 
 <dom-module id="my-global-position">
   <template>
@@ -32,6 +33,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       iron-icon {
         color: #72767D;
         margin-right: 8px;
+      }
+
+      .card .large-text {
+          line-height: 1em;
       }
 
       .circle-list {
@@ -75,14 +80,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <div class="card">
       <div class="horizontal-card horizontal-flex">
-        <div class="text flex">
+        <div class="text flex text-centered">
           <div class="small-text">ACCOUNT BALANCES</div>
-          <div class="large-text">2123,78<span class="text"> €</span></div>
+          <div class="large-text">[[accountBalances]]<span class="text"> €</span></div>
         </div>
-        <div class="text flex">
-          <div class="small-text">CARD BALANCES</div>
-          <div class="large-text">602,23<span class="text"> €</span></div>
-        </div>
+        <!--<div class="text flex">-->
+          <!--<div class="small-text">CARD BALANCES</div>-->
+          <!--<div class="large-text">[[cardsBalances]]<span class="text"> €</span></div>-->
+        <!--</div>-->
       </div>
 
       <div class="horizontal-card horizontal-flex">
@@ -93,30 +98,96 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <a class="link">
           <iron-icon icon="icons:credit-card"></iron-icon>Your accounts</a>
       </div>
-    </div>
-
-    <div class="card">
-      <div class="circle-list">
-        <div class="circle pink">
-          <div class="text">132,97<span>€</span></div>
-          <div class="small-text">March Outgoings</div>
-        </div>
-
-        <div class="circle green">
-          <div class="text">1782,97<span>€</span></div>
-          <div class="small-text">March Income</div>
-        </div>
-      </div>
 
     </div>
+
+    <div class="card row-displayed">
+
+      <nvd3-donut
+              id="nvd3"
+              data="[[data]]"
+              height="200"
+              width="300"
+              auto-resize
+              show-legend
+              donut-ratio="0.25"></nvd3-donut>
+
+      <template is="dom-repeat" items="[[globalPosition]]">
+
+          <div class="individual-card horizontal-flex">
+            <div>
+              <iron-image class="app-logo" src="../images/[[item.logo]]"></iron-image>
+            </div>
+            <div class="text">
+              <span class="important">[[item.balance]]</span><span class="text">€</span>
+            </div>
+          </div>
+
+      </template>
+    </div>
+
+
+
+    <!--<div class="card">-->
+      <!--<div class="circle-list">-->
+        <!--<div class="circle pink">-->
+          <!--<div class="text">132,97<span>€</span></div>-->
+          <!--<div class="small-text">March Outgoings</div>-->
+        <!--</div>-->
+
+        <!--<div class="circle green">-->
+          <!--<div class="text">1782,97<span>€</span></div>-->
+          <!--<div class="small-text">March Income</div>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
 
   </template>
 
   <script>
     Polymer({
       is: 'my-global-position',
+      properties: {
+
+        globalPosition: {
+          type: Array
+        },
+
+        data: {
+          type: Array,
+          value: []
+        },
+
+        accountBalances: Number,
+
+        cardsBalances: Number
+      },
+
+      observers: [
+        'calculateBalances(globalPosition.*, accountBalances, cardsBalances)'
+      ],
+
+      attached: function() {
+        this.accountBalances = 0;
+        this.cardsBalances = 0;
+        this.data = [];
+        this.calculateBalances();
+      },
+
       onTap: function(event) {
         event.preventDefault();
+      },
+
+      calculateBalances: function() {
+        var i = 0, j = 0, balances = [];
+        for(i; i<this.globalPosition.length; i++) {
+          j += this.globalPosition[i].balance;
+          balances[i] = { 'label': this.globalPosition[i].name, 'value': this.globalPosition[i].balance }
+        }
+        this.accountBalances = parseInt(j);
+//        this.set('data', JSON.stringify(balances));
+//        this.$.nvd3.data = balances;
+        this.set('data', balances);
       }
     });
   </script>

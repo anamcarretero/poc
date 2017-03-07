@@ -28,9 +28,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
-<link rel="import" href="../bower_components/paper-item/paper-item.html">
-<link type="text/javascript" href="../bower_components/auth0.js/build/auth0.js">
-<!--<link rel="import" href="../bower_components/auth0.js/build/auth0.min.js">-->
+<link rel="import" href="../bower_components/paper-item/paper-item.html"><link rel="import" href="../bower_components/paper-item/paper-item.html">
+
+<!--<link rel="import" href="../bower_components/nvd3-elements/nvd3-elements.html">-->
+<link rel="import" href="my-data-manager.html">
+<!--<link rel="import" href="../bower_components/iron-signals/iron-signals.html"><link rel="import" href="../bower_components/paper-item/paper-item.html">-->
+
+<link rel="import" href="../bower_components/iron-localstorage/iron-localstorage.html">
+<!--<link type="text/javascript" href="../bower_components/auth0.js/build/auth0.js">-->
+<link type="text/javascript" href="../bower_components/oauth-js/dist/oauth.js">
+
 <link rel="import" href="my-icons.html">
 
 
@@ -137,7 +144,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                         <a name="log-in" href="/log-in">Log in</a>
                     </template>
                     <a name="global-position" href="/global-position"><iron-icon icon="icons:home"></iron-icon>Global Position</a>
-                    <a name="accounts" href="/accounts"><iron-icon icon="icons:credit-card"></iron-icon>Accounts and Cards</a>
+                    <a name="accounts" href="/accounts"><iron-icon icon="icons:credit-card"></iron-icon>Accounts</a>
                     <!--<a name="settings" href="/settings"><iron-icon icon="icons:settings"></iron-icon>Settings</a>-->
                     <a name="entities" href="/entities"><iron-icon icon="icons:settings"></iron-icon>Entities</a></iron-selector>
             </app-drawer>
@@ -156,19 +163,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     </app-toolbar>
                 </app-header>
 
+                <my-data-manager entities="{{entities}}" global-position="{{globalPosition}}"></my-data-manager>
                 <iron-pages
                         selected="[[page]]"
                         attr-for-selected="name"
                         fallback-selection="view404"
                         role="main">
                     <my-log-in name="log-in" user-name="{{userName}}"></my-log-in>
-                    <my-global-position name="global-position"></my-global-position>
+                    <my-global-position name="global-position" global-position="[[globalPosition]]"></my-global-position>
                     <my-accounts name="accounts"></my-accounts>
                     <my-settings name="settings" code="{{code}}"></my-settings>
-                    <my-entities name="entities"></my-entities>
+                    <my-entities name="entities" entities="[[entities]]"></my-entities>
                     <!--<my-new-entity name="new-entity"></my-new-entity>-->
                     <!--<my-available-entity-list name="available-entity-list"></my-available-entity-list>-->
                     <my-user-entities name="user-entities" code="[[code]]"></my-user-entities>
+                    <my-connect-response name="connect-response"></my-connect-response>
                     <my-view404 name="view404"></my-view404>
                 </iron-pages>
 
@@ -182,6 +191,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </template>
 
     <script>
+//        var WEBAUTH;
+//        OAuth.initialize('YXBwLmJidmEuYWdncmVnYXRvcnM6ZnpZVFgqWmU5RFJARHNqJWx6eDhhSks3QkZjbnRGaHRQKndCMjMxdFJlcnNwUmJMUkFVVGpCUUZkJXB5eCRiUQ==');
         Polymer({
             is: 'my-app',
 
@@ -203,8 +214,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 },
 
                 entities: {
-                    type: Object
-                }
+                    type: Array
+                },
+
+                globalPosition: Array
             },
 
             observers: [
@@ -216,15 +229,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             },
 
             attached: function () {
-                var entitiesJson = {
-                    banks: [
-                        {id: '0123', name: 'Bankinter', userId: '05654456Z', userPassword: '123456', logo:'../images/bankinter.gif'},
-                        {id: '987', name: 'BBVA', userId: '05654456Z', userPassword: '123456', logo: '../images/0182.png'},
-                        {id: '0321', name: 'Santander', userId: '05654456Z', userPassword: '123456', logo:'../images/santander.png'}
-                    ]
-                };
-
-                this.entities = entitiesJson.banks;
+                this.entities= [];
+//                var entitiesJson = {
+//                    banks: [
+//                        {id: '0123', name: 'Bankinter', userId: '05654456Z', userPassword: '123456', logo:'../images/bankinter.gif'},
+//                        {id: '987', name: 'BBVA', userId: '05654456Z', userPassword: '123456', logo: '../images/0182.png'},
+//                        {id: '0321', name: 'Santander', userId: '05654456Z', userPassword: '123456', logo:'../images/santander.png'}
+//                    ]
+//                };
+//
+//                this.entities = entitiesJson.banks;
 
             },
 

@@ -11,13 +11,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="shared-styles.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
-<link type="text/javascript" href="../bower_components/auth0.js/build/auth0.min.js">
-<!--<link rel="import" href="my-available-entity-list.html">-->
-<!--<link rel="import" href="my-user-entities.html">-->
-<!--<script type="text/javascript" src="libs/highlight.min.js"></script>-->
-<!--<script type="text/javascript" src="libs/marked.js"></script>-->
-<!--<script type="text/javascript" src="libs/client-oauth2.js"></script>-->
-<!--<script type="text/javascript" src="libs/oauth2.js"></script>-->
+<link rel="import" href="my-available-entity-list.html">
 
 <dom-module id="my-entities">
     <template>
@@ -26,6 +20,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 display: block;
                 padding: 16px;
                 background-color: var(--grey-color-light-grey);
+            }
+
+            .horizontal-card {
+                min-height: 50px;
+            }
+
+            .text.flex {
+                color: #757575;
             }
 
         </style>
@@ -38,60 +40,30 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </app-route>
 
 
-        <!--<my-available-entity-list></my-available-entity-list>-->
+        <my-available-entity-list hidden$="[[thereAreEntities]]" id="entityList"></my-available-entity-list>
 
-        <!--<my-user-entities entities="[[entities]]"></my-user-entities>-->
+        <template is="dom-if" if="[[thereAreEntities]]">
 
+            <template is="dom-repeat" items="[[entities]]">
+                <div class="card">
+                    <iron-image class="account-logo" src="../images/[[item.logo]]"></iron-image>
+                    <template is="dom-repeat" items="[[item.accounts]]">
+                        <div class="horizontal-card horizontal-flex">
+                            <div hidden id="accountId">[[item.id]]</div>
+                            <div class="text flex">
+                                <span>([[item.number]])</span> · <span class="capitalized">[[_conputeDescription(item.description)]]</span>
+                            </div>
+                            <div class="text"><span>[[item.balance]]</span> <span class="small-text">[[item.currency]]</span></div>
+                        </div>
+                    </template>
+                </div>
+            </template>
 
-        <paper-button class="primary" raised on-tap="_obtainCode">Add Entity</paper-button>
+            <paper-button class="primary" raised on-tap="_addNewEntity">Add entity</paper-button>
 
-        <!--<iron-ajax-->
-                <!--id="xhrConnectUris"-->
-                <!--url="{{xhrConnectUrisUrl}}"-->
-                <!--handle-as="json"-->
-                <!--on-response="_handlerXhrConnectUrlsResponse"-->
-                <!--on-error="_handlerXhrConnectUrlsErrorResponse">-->
-        <!--</iron-ajax>-->
-        <!--<iron-ajax-->
-                <!--id="xhrConnectUris"-->
-                <!--handle-as="json"-->
-                <!--with-credentials="true"-->
-                <!--url="https://dev.connect.bbvaop3n.com/token?grant_type=authorization_code&code=FxLos5&redirect_uri=http://localhost:8080"-->
-                <!--methos="POST"-->
-                <!--headers="Authorization':'Basic YXBwLmJidmEuYWdncmVnYXRvcnM6ZnpZVFgqWmU5RFJARHNqJWx6eDhhSks3QkZjbnRGaHRQKndCMjMxdFJlcnNwUmJMUkFVVGpCUUZkJXB5eCRiUQ=='">-->
-
-        <!--https://dev.connect.bbvaop3n.com/bbvaconnect?client_id=app.bbva.aggregators&response_type=code&redirect_uri=http://localhost:8080-->
-
-
-        <!--<iron-ajax-->
-                <!--id="xhrConnectUris"-->
-                <!--handle-as="json"-->
-                <!--content-type="application/json"-->
-                <!--url="https://dev.openp.zuul.digitalservices.es:8989/clientapi-sbx-aggregator-v1/bbva/token?code=6rS4pr"-->
-                <!--method= "GET"-->
-                <!--last-response="_handleResponse"></iron-ajax>-->
-        <!--headers="{'Authorization':'Basic YXBwLmJidmEuYWdncmVnYXRvcnM6ZnpZVFgqWmU5RFJARHNqJWx6eDhhSks3QkZjbnRGaHRQKndCMjMxdFJlcnNwUmJMUkFVVGpCUUZkJXB5eCRiUQ=='}"-->
-        <!--with-credentials="true"-->
-
-        <!--<iron-ajax-->
-                <!--id="xhrConnectUris"-->
-                <!--url= "{{xhrConnectUrisUrl}}"-->
-                <!--handle-as="json"-->
-                <!--on-response="_handlerXhrConnectUrlsResponse"-->
-                <!--on-error = "_handlerXhrConnectUrlsErrorResponse">-->
-        <!--</iron-ajax>-->
-
-        <!--<o-auth service="https://dev.connect.bbvaop3n.com"-->
-                <!--client="app.bbva.aggregators"-->
-                <!--listen="oauth=bbvaconnect"-->
-                <!--params="redirect_uri=https://localhost:5000"-->
-                <!--id="oauthbbva">-->
-
-        <!--</o-auth>-->
-
+        </template>
 
     </template>
-    <script type="text/javascript" src="https://cdn.auth0.com/js/auth0/8.0.4/auth0.min.js"></script>
     <script>
 
         Polymer({
@@ -99,81 +71,50 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             properties: {
 
-                xhrConnectUrisUrl: {
-                    type: String,
-                    value: 'https://dev.connect.bbvaop3n.com/bbvaconnect?scope=&'
-                },
-                entity: {
-                    type: String,
-                    value: 'bbva'
-                },
                 entities: {
                     type: Object
                 },
-                access_token_uri: {
-                    type: String,
-                    value: ''
+                thereAreEntities: {
+                    type: Boolean,
+                    value: false
                 },
-                app_id: {
-                    type: String,
-                    value: 'app.bbva.aggregators'
-                },
-
-                code: {
-                    type: String,
-                    observer: '_codeChanged'
+                showEntityList: {
+                    type: Boolean,
+                    value: true
                 }
             },
 
-            attached: function () {
-                this.entities = [
-                    {id: '0123', name: 'Bankinter', userId: '05654456Z', userPassword: '123456', logo:'../images/bankinter.gif'},
-                    {id: '987', name: 'BBVA', userId: '05654456Z', userPassword: '123456', logo: '../images/0182.png'},
-                    {id: '0321', name: 'Santander', userId: '05654456Z', userPassword: '123456', logo:'../images/santander.png'}
-                ];
-//                var window = window.open('https://dev.connect.bbvaop3n.com/bbvaconnect?scope=&client_id=app.bbva.aggregators&redirect_uri=https://localhost:5000&response_type=code', '_blank');
+            observers: [
+                    '_onEntitiesChanged(entities.*)'
+            ],
 
-//                var webAuth = new auth0.WebAuth({
-//                    domain:       'https://dev.connect.bbvaop3n.com/',
-//                    clientID:     'app.bbva.aggregators',
-//                    redirectUri:   'https://localhost:5000',
-//                    responseType:   'code'
-//                });
-//
-//                webAuth.authorize({
-//                    connection: 'bbvaconnect'
-//                });
-//
-//                webAuth.popup.authorize({
-//                    connection: 'bbvaconnect'
-//                });
+            _onEntitiesChanged: function() {
+                this._thereAreEntities();
             },
 
-            _obtainCode: function() {
-                var webAuth = new auth0.WebAuth({
-                    domain:       'dev.connect.bbvaop3n.com/bbvaconnect?scope=&',
-                    clientID:     'app.bbva.aggregators',
-                    redirectUri:   'https://localhost:5000/settings',
-                    responseType:   'code'
-                });
-
-                webAuth.popup.authorize({
-                    connection: 'bbvaconnect'
-                });
-
-                auth0.parseHash(window.location.hash, function(err, authResult) {
-                    if (err) {
-                        return console.log(err);
+            _conputeDescription: function(text) {
+                if(text !== undefined) {
+                    var splitedText = text.split(' ');
+                    if(splitedText[0]!==undefined && splitedText[0].toLowerCase() === 'bbva') {
+                        return text.toLowerCase().substr(5);
                     }
-
-                    auth0.client.userInfo(authResult.accessToken, function(err, user) {
-                        // Now you have the user's information
-                    });
-                });
+                    else return text.toLowerCase();
+                }
             },
 
-            _codeChanged: function() {
-                console.log('code changed');
+            _thereAreEntities: function() {
+                if(this.entities !== undefined && this.entities !== null && this.entities.length > 0) {
+                    this.thereAreEntities = true;
+                    this.showEntityList = false;
+                }
+                else {
+                    this.thereAreEntities = false;
+                    this.showEntityList = true;
+                }
+            },
+
+            _addNewEntity: function() {
+                this.thereAreEntities = false;
             }
 
         });
