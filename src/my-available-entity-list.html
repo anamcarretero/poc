@@ -1,0 +1,74 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="my-available-entity-list">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+      }
+
+      .list-box-item {
+        line-height: 48px;
+        display: block;
+        margin-top: -1px;
+        border-top: 1px solid var(--grey-color-light-grey);
+        border-bottom: 1px solid var(--grey-color-light-grey);
+      }
+
+    </style>
+
+    <div class="card">
+      <paper-list-box class="list-box" selected="0">
+        <paper-item class="list-box-item">
+          <div on-tap="_signUpWithConnect">BBVA</div>
+        </paper-item>
+        <paper-item class="list-box-item">Bankinter</paper-item>
+        <paper-item class="list-box-item">
+          <div>Bank Sabadell</div>
+        </paper-item>
+        <paper-item class="list-box-item">
+          <div>Banco santarder</div>
+        </paper-item>
+        <paper-item class="list-box-item">
+          <div>Cajamar</div>
+        </paper-item>
+        <paper-item class="list-box-item">
+          <div>La Caixa</div>
+        </paper-item>
+        <paper-item class="list-box-item">
+          <div>Unicaja</div>
+        </paper-item>
+        <paper-item class="list-box-item">
+          <div>Ibercaja</div>
+        </paper-item>
+        <paper-item class="list-box-item">
+          <div>Banco Popular</div>
+        </paper-item>
+        <paper-item class="list-box-item">
+          <div>Bankia</div>
+        </paper-item>
+        <paper-item class="list-box-item">
+          <div>Banesto</div>
+        </paper-item>
+      </paper-list-box>
+    </div>
+
+  </template>
+
+  <script>
+    Polymer({
+      is: 'my-available-entity-list',
+    });
+  </script>
+</dom-module>
